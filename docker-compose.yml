@@ -21,7 +21,7 @@ services:
         volumes:
             - '.:/var/www/html'
             - './docker/var/log/php/:/var/log/php/'
-            - './docker/php/config/xdebug.ini:/etc/php/8.3/cli/conf.d/docker-php-ext-xdebug.ini'
+            - './docker/php/config/xdebug.ini:/etc/php/8.3/cli/conf.d/20-xdebug.ini'
         networks:
             - sail
         depends_on:
