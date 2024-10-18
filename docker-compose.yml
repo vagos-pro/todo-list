@@ -12,6 +12,7 @@ services:
             - '${APP_PORT:-80}:80'
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
+            PHP_IDE_CONFIG: 'serverName=localhost'
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
@@ -19,6 +20,8 @@ services:
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
         volumes:
             - '.:/var/www/html'
+            - './docker/var/log/php/:/var/log/php/'
+            - './docker/php/config/xdebug.ini:/etc/php/8.3/cli/conf.d/docker-php-ext-xdebug.ini'
         networks:
             - sail
         depends_on:
