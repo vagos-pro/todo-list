@@ -7,28 +7,39 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Зависимости
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* PHP 8.3
+* Laravel 9
+* Mysql 8.0
+* [Docker](https://www.docker.com/get-started)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<hr>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Начало работы (первый запуск)
 
-## Learning Laravel
+1. Клонирование `git clone git@github.com:vagos-pro/todo-list.git`
+2. Скопировать `.env.example` под именем `.env` и установить значения локального окружения
+3. Запустить сервис: `make start`
+4. Установить composer зависимости `make composer-install`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Config for Xdebug
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Path: `docker/php/config/xdebug.ini`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```angular2html
+zend_extension=/usr/lib/php/20230831/xdebug.so
+xdebug.mode=debug
+xdebug.start_with_request=yes
+xdebug.client_port=9003
+xdebug.idekey=PHPSTORM
+```
+For macos:
+```
+xdebug.client_host=host.docker.internal
+```
+For Linux
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+xdebug.client_host=172.17.0.1
+```
