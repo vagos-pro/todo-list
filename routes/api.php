@@ -19,6 +19,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::prefix('tasks')->middleware('auth:sanctum')->group(function () {
+    Route::get('/', [TaskController::class, 'index']);
+    Route::post('/', [TaskController::class, 'store']);
+    Route::put('/{task}', [TaskController::class, 'update']);
+    Route::delete('/{task}', [TaskController::class, 'destroy']);
+    Route::patch('/{task}/complete', [TaskController::class, 'toggleComplete']);
+});
