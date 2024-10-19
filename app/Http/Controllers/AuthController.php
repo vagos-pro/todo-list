@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 /**
  * @OA\Info(
  *     version="1.0.0",
- *     title="Todo-list API",
+ *     title="TODO-list API",
  *     description="Документация для API",
  *     @OA\Contact(
  *         email="vagos.dev@gmail.com"
@@ -112,7 +112,7 @@ class AuthController extends Controller
      *         response=422,
      *         description="Validation error",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="The given data was invalid."),
+     *             @OA\Property(property="message", type="string", example="Please correct the errors."),
      *             @OA\Property(
      *                 property="errors",
      *                 type="object",
