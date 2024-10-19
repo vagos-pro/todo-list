@@ -2,7 +2,11 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +50,35 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($request->expectsJson()) {
+            if ($e instanceof ValidationException) {
+                return response()->json([
+                    'message' => 'Please correct the errors.',
+                    'errors' => $e->validator->getMessageBag(),
+                ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+
+            if ($e instanceof ModelNotFoundException) {
+                return response()->json([
+                    'message' => 'Record not found',
+                ], Response::HTTP_NOT_FOUND);
+            }
+
+            if ($e instanceof AuthenticationException) {
+                return response()->json([
+                    'message' => 'Unauthenticated.',
+                ], Response::HTTP_UNAUTHORIZED);
+            }
+
+            return response()->json([
+                'message' => 'An unexpected error occurred.',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return parent::render($request, $e);
     }
 }

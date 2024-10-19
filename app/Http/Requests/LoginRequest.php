@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,21 +35,18 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         // todo: изменить текста если нужно
-        return [
-//            'email.required' => 'Электронная почта обязательна для заполнения.',
-//            'email.email' => 'Введите корректный адрес электронной почты.',
-//            'password.required' => 'Пароль обязателен для заполнения.',
-//            'password.min' => 'Пароль должен содержать не менее :min символов.',
-        ];
+        return [];
     }
 
-    protected function passedValidation()
+    protected function passedValidation(): void
     {
         // Проверка учетных данных пользователя
         if (!Auth::attempt($this->only('email', 'password'))) {
-            return response()->json([
-                'message' => 'Invalid login credentials',
-            ], Response::HTTP_UNAUTHORIZED);
+            throw new HttpResponseException(
+                response()->json([
+                    'message' => 'Invalid login credentials',
+                ], Response::HTTP_UNAUTHORIZED)
+            );
         }
     }
 }
