@@ -255,9 +255,19 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "bearerAuth": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Введите 'Bearer' и затем ваш токен",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     },

@@ -23,6 +23,14 @@ use Illuminate\Http\Request;
  *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
  *     )
  * )
+ *
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     description="Введите 'Bearer' и затем ваш токен"
+ * )
  */
 class AuthController extends Controller
 {
@@ -144,7 +152,7 @@ class AuthController extends Controller
      *     summary="User logout",
      *     description="Revoke the authenticated user's access token.",
      *     tags={"Authentication"},
-     *     security={{"sanctum": {}}},
+     *     security={{"bearerAuth": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="Successful logout",
