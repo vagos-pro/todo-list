@@ -1,9 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Task;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="TaskUpdateRequest",
+ *     @OA\Property(property="title", type="string", description="The updated title of the task", example="Buy groceries and vegetables"),
+ *     @OA\Property(property="description", type="string", description="The updated description of the task", example="Buy milk, bread, eggs, and carrots"),
+ *     @OA\Property(property="completed", type="boolean", description="Indicates whether the task is completed", example=true)
+ * )
+ */
 class TaskUpdateRequest extends FormRequest
 {
     /**
