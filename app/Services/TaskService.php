@@ -46,6 +46,8 @@ class TaskService
         $query = $request->input('query');
         $perPage = $request->input('perPage', $this->defaultPerPage);
 
-        return Task::search($query)->paginate($perPage);
+        return Task::search($query)
+            ->where('user_id', Auth::id())
+            ->paginate($perPage);
     }
 }
