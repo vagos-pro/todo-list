@@ -12,6 +12,7 @@
 * PHP 8.3
 * Laravel 9
 * Mysql 8.0
+* Meilisearch 1.10
 * [Docker](https://www.docker.com/get-started) & [Laravel Sail](https://laravel.com/docs/9.x/sail#main-content)
 
 <hr>

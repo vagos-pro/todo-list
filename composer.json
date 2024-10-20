@@ -8,10 +8,12 @@
         "php": "^8.0.2",
         "darkaonline/l5-swagger": "^8.6",
         "guzzlehttp/guzzle": "^7.2",
+        "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/scout": "^10.11",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "meilisearch/meilisearch-php": "^1.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -59,7 +61,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",
