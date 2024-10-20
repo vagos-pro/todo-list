@@ -259,9 +259,167 @@
                     }
                 ]
             }
+        },
+        "/api/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get list of tasks",
+                "operationId": "471d938a3bfaeb6fbd981d7c3e2728b0",
+                "parameters": [
+                    {
+                        "name": "is_completed",
+                        "in": "query",
+                        "description": "Filter by completion status",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort by field (is_completed or created_at)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "direction",
+                        "in": "query",
+                        "description": "Sorting direction (asc or desc)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "description": "Number of tasks per page for pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 15
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "current_page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "last_page": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "per_page": {
+                                            "type": "integer",
+                                            "example": 15
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 150
+                                        }
+                                    },
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TaskResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
+        "schemas": {
+            "TaskFilterRequest": {
+                "properties": {
+                    "completed": {
+                        "description": "Filter tasks by completion status",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "sort": {
+                        "description": "Sort tasks by field (status or created_at)",
+                        "type": "string",
+                        "enum": [
+                            "status",
+                            "created_at"
+                        ],
+                        "example": "created_at"
+                    },
+                    "direction": {
+                        "description": "Sorting direction",
+                        "type": "string",
+                        "enum": [
+                            "asc",
+                            "desc"
+                        ],
+                        "example": "asc"
+                    },
+                    "perPage": {
+                        "description": "Number of tasks per page for pagination",
+                        "type": "integer",
+                        "example": 15
+                    }
+                },
+                "type": "object"
+            },
+            "TaskResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the task",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "The title of the task",
+                        "type": "string",
+                        "example": "Buy groceries"
+                    },
+                    "description": {
+                        "description": "The description of the task",
+                        "type": "string",
+                        "example": "Buy milk, bread, and eggs from the store"
+                    },
+                    "completed": {
+                        "description": "Indicates whether the task is completed",
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "created_at": {
+                        "description": "The creation timestamp of the task",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-10-10 12:00:30"
+                    },
+                    "updated_at": {
+                        "description": "The last update timestamp of the task",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-10-10 12:00:30"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
@@ -275,6 +433,10 @@
         {
             "name": "Authentication",
             "description": "Authentication"
+        },
+        {
+            "name": "Tasks",
+            "description": "Tasks"
         }
     ]
 }
