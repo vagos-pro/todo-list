@@ -54,31 +54,27 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        if ($request->expectsJson()) {
-            if ($e instanceof ValidationException) {
-                return response()->json([
-                    'message' => 'Please correct the errors.',
-                    'errors' => $e->validator->getMessageBag(),
-                ], Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
-
-            if ($e instanceof ModelNotFoundException) {
-                return response()->json([
-                    'message' => 'Record not found',
-                ], Response::HTTP_NOT_FOUND);
-            }
-
-            if ($e instanceof AuthenticationException) {
-                return response()->json([
-                    'message' => 'Unauthenticated.',
-                ], Response::HTTP_UNAUTHORIZED);
-            }
-
+        if ($e instanceof ValidationException) {
             return response()->json([
-                'message' => 'An unexpected error occurred.',
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                'message' => 'Please correct the errors.',
+                'errors' => $e->validator->getMessageBag(),
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        return parent::render($request, $e);
+        if ($e instanceof ModelNotFoundException) {
+            return response()->json([
+                'message' => 'Record not found',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($e instanceof AuthenticationException) {
+            return response()->json([
+                'message' => 'Unauthenticated.',
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        return response()->json([
+            'message' => 'An unexpected error occurred.',
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

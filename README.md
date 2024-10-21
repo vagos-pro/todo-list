@@ -12,7 +12,8 @@
 * PHP 8.3
 * Laravel 9
 * Mysql 8.0
-* [Docker](https://www.docker.com/get-started)
+* Meilisearch 1.10
+* [Docker](https://www.docker.com/get-started) & [Laravel Sail](https://laravel.com/docs/9.x/sail#main-content)
 
 <hr>
 
@@ -20,10 +21,21 @@
 
 1. Клонирование `git clone git@github.com:vagos-pro/todo-list.git`
 2. Скопировать `.env.example` под именем `.env` и установить значения локального окружения
-3. Запустить сервис: `make start`
-4. Установить composer зависимости `make composer-install`
+3. Запуск контейнеров: `make start`
+4. Установка зависимостей composer `make composer-install`
+5. Запуск миграций `./vendor/bin/sail artisan migrate`
+6. Запуск тестов `./vendor/bin/sail artisan test`
 
-## Config for Xdebug
+## API Documentation Swagger
+
+Path: `http://localhost/api/documentation/`
+
+Generate docs `./vendor/bin/sail artisan l5-swagger:generate`
+
+For auto-generate docs: `L5_SWAGGER_GENERATE_ALWAYS=true` in `.env`
+
+
+## Xdebug config
 
 Path: `docker/php/config/xdebug.ini`
 
@@ -33,8 +45,9 @@ xdebug.mode=debug
 xdebug.start_with_request=yes
 xdebug.client_port=9003
 xdebug.idekey=PHPSTORM
+xdebug.client_host=
 ```
-For macos:
+For Macos & Windows:
 ```
 xdebug.client_host=host.docker.internal
 ```
