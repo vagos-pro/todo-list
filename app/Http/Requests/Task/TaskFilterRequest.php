@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * @OA\Schema(
  *     schema="TaskFilterRequest",
- *     @OA\Property(property="completed", type="boolean", description="Filter tasks by completion status", example=true),
+ *     @OA\Property(property="is_completed", type="boolean", description="Filter tasks by completion status", example=true),
  *     @OA\Property(property="sort", type="string", enum={"status", "created_at"}, description="Sort tasks by field (status or created_at)", example="created_at"),
  *     @OA\Property(property="direction", type="string", enum={"asc", "desc"}, description="Sorting direction", example="asc"),
  *     @OA\Property(property="perPage", type="integer", description="Number of tasks per page for pagination", example=15)

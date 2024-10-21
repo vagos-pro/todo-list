@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *     schema="TaskUpdateRequest",
  *     @OA\Property(property="title", type="string", description="The updated title of the task", example="Buy groceries and vegetables"),
  *     @OA\Property(property="description", type="string", description="The updated description of the task", example="Buy milk, bread, eggs, and carrots"),
- *     @OA\Property(property="completed", type="boolean", description="Indicates whether the task is completed", example=true)
+ *     @OA\Property(property="is_completed", type="boolean", description="Indicates whether the task is completed", example=true)
  * )
  */
 class TaskUpdateRequest extends FormRequest
@@ -34,7 +34,7 @@ class TaskUpdateRequest extends FormRequest
         return [
             'title' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
-            'completed' => 'sometimes|boolean',
+            'is_completed' => 'sometimes|boolean',
         ];
     }
 }
